@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build:dev": "rimraf dist && rollup --bundleConfigAsCjs --config scripts/rollup/react.config.js",
+    "build:dev": "rimraf dist && rollup --bundleConfigAsCjs --config scripts/rollup/dev.config.js",
     "lint": "eslint ./packages",
     "lint:lint-staged": "lint-staged",
     "prepare": "husky"
@@ -45,10 +45,14 @@
   },
   "pnpm": {
     "overrides": {
-      "react": "link:dist/node_modules/react"
+      "react": "link:dist/node_modules/react",
+      "react-dom": "link:dist/node_modules/react-dom"
     }
   },
   "dependencies": {
-    "react": "link:dist/node_modules/react"
+    "@rollup/plugin-alias": "^5.1.1",
+    "@rollup/plugin-replace": "^6.0.2",
+    "react": "link:dist/node_modules/react",
+    "react-dom": "link:dist/node_modules/react-dom"
   }
 }
