@@ -1,7 +1,12 @@
 import { ReactElementType } from 'shared/ReactTypes';
 import { FiberNode } from './fiber';
 import { processUpdateQueue, UpdateQueue } from './updateQueue';
-import { FunctionComponent, HostComponent, HostRoot, HostText } from './workTags';
+import {
+  FunctionComponent,
+  HostComponent,
+  HostRoot,
+  HostText,
+} from './workTags';
 import { mountChildFibers, reconcileChildFibers } from './childFilber';
 import { renderWithHooks } from './fiberHooks';
 

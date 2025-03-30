@@ -1,3 +1,4 @@
+import { Dispatch } from 'react/src/currentDispatcher';
 import { Action } from 'shared/ReactTypes';
 
 export interface Update<State> {
@@ -8,6 +9,7 @@ export interface UpdateQueue<State> {
   shared: {
     pending: Update<State> | null;
   };
+  dispatch: Dispatch<State> | null;
 }
 
 export const createUpdate = <State>(action: Action<State>): Update<State> => {
@@ -21,10 +23,14 @@ export const createUpdateQueue = <State>() => {
     shared: {
       pending: null,
     },
+    dispatch: null,
   } as UpdateQueue<State>;
 };
 
-export const enqueueUpdate = <State>(updateQueue: UpdateQueue<State>, update: Update<State>) => {
+export const enqueueUpdate = <State>(
+  updateQueue: UpdateQueue<State>,
+  update: Update<State>
+) => {
   updateQueue.shared.pending = update;
 };
 
@@ -32,7 +38,9 @@ export const processUpdateQueue = <State>(
   baseState: State,
   pendingUpdate: Update<State> | null
 ): { memoizedState: State } => {
-  const result: ReturnType<typeof processUpdateQueue<State>> = { memoizedState: baseState };
+  const result: ReturnType<typeof processUpdateQueue<State>> = {
+    memoizedState: baseState,
+  };
 
   if (pendingUpdate !== null) {
     const action = pendingUpdate.action;
