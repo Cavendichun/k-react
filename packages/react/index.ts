@@ -1,6 +1,6 @@
 import { Dispatcher, resolveDispatcher } from './src/currentDispatcher';
 import currentDispatcher from './src/currentDispatcher';
-import { jsxDev } from './src/jsx';
+import { jsxDev, Fragment } from './src/jsx';
 
 export const useState: Dispatcher['useState'] = initialState => {
   const dispatcher = resolveDispatcher();
@@ -15,4 +15,5 @@ export const __SECRET_INTERNALS_NO_NOT_USE_OR_YOU_WILL_BE_FIRED = {
 export default {
   version: '0.0.0',
   createElement: jsxDev,
+  Fragment,
 };
