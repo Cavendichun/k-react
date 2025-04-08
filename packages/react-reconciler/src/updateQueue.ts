@@ -63,7 +63,7 @@ export const processUpdateQueue = <State>(
   if (pendingUpdate !== null) {
     // 第一个update
     const first = pendingUpdate.next;
-    let pending = pendingUpdate as Update<any>;
+    let pending = pendingUpdate.next as Update<any>;
     do {
       const updateLane = pending.lane;
       if (updateLane === renderLane) {
