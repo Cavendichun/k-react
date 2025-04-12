@@ -20,6 +20,7 @@ export function flushSyncCallback() {
       }
     } finally {
       isFlushingSyncQueue = false;
+      syncQueue = null;
     }
   }
 }

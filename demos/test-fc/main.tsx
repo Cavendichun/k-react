@@ -13,8 +13,8 @@ function App() {
     <ul
       onClick={() => {
         setNum(num => num + 1);
-        setNum(num => num + 2);
-        setNum(num => num + 3);
+        setNum(num => num + 1);
+        setNum(num => num + 1);
       }}
     >
       {num}
