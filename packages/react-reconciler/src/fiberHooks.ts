@@ -79,12 +79,14 @@ const HookDispatcherOnMount: Dispatcher = {
   useState: mountState,
   useEffect: mountEffect,
   useTransition: mountTransition,
+  useRef: mountRef,
 };
 
 const HookDispatcherOnUpdate: Dispatcher = {
   useState: updateState,
   useEffect: updateEffect,
   useTransition: updateTransition,
+  useRef: updateRef,
 };
 
 function mountEffect(create: EffectCallback | void, deps: EffectDeps | void) {
@@ -139,6 +141,18 @@ function areHookInputsEqual(nextDeps: EffectDeps, prevDeps: EffectDeps) {
     return false;
   }
   return true;
+}
+
+function mountRef<T>(initialValue: T): { current: T } {
+  const hook = mountWorkInProgressHook();
+  const ref = { current: initialValue };
+  hook.memoizedState = ref;
+  return ref;
+}
+
+function updateRef<T>(initialValue: T): { current: T } {
+  const hook = updateWorkInProgressHook();
+  return hook.memoizedState;
 }
 
 function pushEffect(
