@@ -186,13 +186,27 @@ function ChildReconciler(shouldTrackEffects: boolean) {
     return firstNewFiber;
   }
 
+  function getElementKeyToUse(element: any, index: number) {
+    if (
+      Array.isArray(element) ||
+      typeof element === 'string' ||
+      typeof element === 'number' ||
+      element === undefined ||
+      element === null
+    ) {
+      return index;
+    }
+    return element.key !== null ? element.key : index;
+  }
+
   function updateFromMap(
     returnFiber: FiberNode,
     existingChildren: ExistingChildren,
     index: number,
     element: any
   ): FiberNode | null {
-    const keyToUse = element.key !== null ? element.key : index;
+    // const keyToUse = element.key !== null ? element.key : index;
+    const keyToUse = getElementKeyToUse(element, index);
     const before = existingChildren.get(keyToUse);
 
     if (typeof element === 'string' || typeof element === 'number') {
